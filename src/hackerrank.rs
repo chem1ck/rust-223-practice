@@ -1,8 +1,8 @@
-#[test]
 use std::env;
 use std::fs::File;
 use std::io::{self, BufRead, Write};
-
+use std::collections::HashMap;
+#[test]
 /*
  * Complete the 'simpleArraySum' function below.
  *
@@ -10,7 +10,7 @@ use std::io::{self, BufRead, Write};
  * The function accepts INTEGER_ARRAY ar as parameter.
  */
 
-fn simpleArraySum(ar: &[i32]) -> i32 {
+fn simple_array_sum(ar: &[i32]) -> i32 {
     let mut sum = 0;
     for val in ar{
         sum += val;
@@ -32,7 +32,7 @@ fn test1() {
         .map(|s| s.to_string().parse::<i32>().unwrap())
         .collect();
 
-    let result = simpleArraySum(&ar);
+    let result = simple_array_sum(&ar);
 
     writeln!(&mut fptr, "{}", result).ok();
 }
@@ -46,7 +46,7 @@ fn test1() {
  *  2. INTEGER_ARRAY b
  */
 
-fn compareTriplets(a: &[i32], b: &[i32]) -> Vec<i32> {
+fn compare_triplets(a: &[i32], b: &[i32]) -> Vec<i32> {
     let mut result = vec![0, 0];
     for i in 0..a.len(){
         if a[i] > b[i]{
@@ -77,7 +77,7 @@ fn test2() {
         .map(|s| s.to_string().parse::<i32>().unwrap())
         .collect();
 
-    let result = compareTriplets(&a, &b);
+    let result = compare_triplets(&a, &b);
 
     for i in 0..result.len() {
         write!(&mut fptr, "{}", result[i]).ok();
@@ -97,7 +97,7 @@ fn test2() {
  * The function accepts LONG_INTEGER_ARRAY ar as parameter.
  */
 
-fn aVeryBigSum(ar: &[i64]) -> i64 {
+fn a_very_big_sum(ar: &[i64]) -> i64 {
     let mut sum = 0;
     for val in ar{
         sum += val;
@@ -119,7 +119,7 @@ fn test3() {
         .map(|s| s.to_string().parse::<i64>().unwrap())
         .collect();
 
-    let result = aVeryBigSum(&ar);
+    let result = a_very_big_sum(&ar);
 
     writeln!(&mut fptr, "{}", result).ok();
 }
@@ -157,7 +157,7 @@ fn test4() {
  * The function accepts INTEGER_ARRAY arr as parameter.
  */
 
-fn miniMaxSum(arr: &[i64]) {
+fn mini_max_sum(arr: &[i64]) {
     let sum: i64 = arr.iter().sum();
     let min = *arr.iter().min().unwrap();
     let max = *arr.iter().max().unwrap();
@@ -177,7 +177,7 @@ fn test5() {
         .map(|s| s.to_string().parse::<i64>().unwrap())
         .collect();
 
-    miniMaxSum(&arr);
+    mini_max_sum(&arr);
 }
 #[test]
 /*
@@ -187,9 +187,9 @@ fn test5() {
  * The function accepts INTEGER_ARRAY candles as parameter.
  */
 
-fn birthdayCakeCandles(candles: &[i32]) -> i32 {
+fn birthday_cake_candles(candles: &[i32]) -> i32 {
     let mut max = candles[0];
-    let mut countMax = 0;
+    let mut count_max = 0;
     for i in candles{
         if i > &max {
             max = *i;
@@ -197,10 +197,10 @@ fn birthdayCakeCandles(candles: &[i32]) -> i32 {
     }
     for j in candles{
         if *j == max {
-            countMax += 1;
+            count_max += 1;
         }
     }
-    return countMax;
+    return count_max;
 }
 
 fn test6() {
@@ -217,12 +217,12 @@ fn test6() {
         .map(|s| s.to_string().parse::<i32>().unwrap())
         .collect();
 
-    let result = birthdayCakeCandles(&candles);
+    let result = birthday_cake_candles(&candles);
 
     writeln!(&mut fptr, "{}", result).ok();
 }
 #[test]
-fn timeConversion(s: &str) -> String {
+fn time_conversion(s: &str) -> String {
     // Извлекаем часы, минуты и секунды
     let hours: u32 = s[0..2].parse().unwrap();
     let minutes = &s[3..5];
@@ -248,12 +248,12 @@ fn test7() {
 
     let s = stdin_iterator.next().unwrap().unwrap();
 
-    let result = timeConversion(&s);
+    let result = time_conversion(&s);
 
     writeln!(&mut fptr, "{}", result).ok();
 }
 #[test]
-fn gradingStudents(grades: &[i32]) -> Vec<i32> {
+fn grading_students(grades: &[i32]) -> Vec<i32> {
     grades.iter().map(|&grade| {
         if grade < 38 {
             grade
@@ -283,7 +283,7 @@ fn test8() {
         grades.push(grades_item);
     }
 
-    let result = gradingStudents(&grades);
+    let result = grading_students(&grades);
 
     for i in 0..result.len() {
         write!(&mut fptr, "{}", result[i]).ok();
@@ -296,7 +296,7 @@ fn test8() {
     writeln!(&mut fptr).ok();
 }
 #[test]
-fn diagonalDifference(arr: &[Vec<i32>]) -> i32 {
+fn diagonal_difference(arr: &[Vec<i32>]) -> i32 {
     let n = arr.len();
     let mut primary_diagonal_sum = 0;
     let mut secondary_diagonal_sum = 0;
@@ -329,12 +329,12 @@ fn test9() {
             .collect();
     }
 
-    let result = diagonalDifference(&arr);
+    let result = diagonal_difference(&arr);
 
     writeln!(&mut fptr, "{}", result).ok();
 }
 #[test]
-fn countApplesAndOranges(s: i32, t: i32, a: i32, b: i32, apples: &[i32], oranges: &[i32]) {
+fn count_apples_and_oranges(s: i32, t: i32, a: i32, b: i32, apples: &[i32], oranges: &[i32]) {
     let apple_count = apples.iter()
         .filter(|&&dist| a + dist >= s && a + dist <= t)
         .count();
@@ -390,7 +390,7 @@ fn test10() {
         .map(|s| s.to_string().parse::<i32>().unwrap())
         .collect();
 
-    countApplesAndOranges(s, t, a, b, &apples, &oranges);
+    count_apples_and_oranges(s, t, a, b, &apples, &oranges);
 }
 #[test]
 fn kangaroo(x1: i32, v1: i32, x2: i32, v2: i32) -> String {
@@ -427,7 +427,7 @@ fn test11() {
     writeln!(&mut fptr, "{}", result).ok();
 }
 #[test]
-fn getTotalX(a: &[i32], b: &[i32]) -> i32 {
+fn get_total_x(a: &[i32], b: &[i32]) -> i32 {
     let gcd = |x: i32, y: i32| -> i32 {
         let mut a = x;
         let mut b = y;
@@ -492,12 +492,12 @@ fn test12() {
         .map(|s| s.to_string().parse::<i32>().unwrap())
         .collect();
 
-    let total = getTotalX(&arr, &brr);
+    let total = get_total_x(&arr, &brr);
 
     writeln!(&mut fptr, "{}", total).ok();
 }
 #[test]
-fn breakingRecords(scores: &[i32]) -> Vec<i32> {
+fn breaking_records(scores: &[i32]) -> Vec<i32> {
     if scores.is_empty() {
         return vec![0, 0]; // Return 0 for both records if the scores list is empty
     }
@@ -534,7 +534,7 @@ fn test13() {
         .map(|s| s.to_string().parse::<i32>().unwrap())
         .collect();
 
-    let result = breakingRecords(&scores);
+    let result = breaking_records(&scores);
 
     for i in 0..result.len() {
         write!(&mut fptr, "{}", result[i]).ok();
@@ -546,3 +546,255 @@ fn test13() {
 
     writeln!(&mut fptr).ok();
 }
+#[test]
+fn birth_day(s: &[i32], d: i32, m: i32) -> i32 {
+    let mut count = 0;
+
+    for i in 0..=(s.len() as i32 - m) {
+        let sum: i32 = s[i as usize..(i + m) as usize].iter().sum();
+        if sum == d {
+            count += 1;
+        }
+    }
+
+    count
+}
+
+fn  test14() {
+    let stdin = io::stdin();
+    let mut stdin_iterator = stdin.lock().lines();
+
+    let mut fptr = File::create(env::var("OUTPUT_PATH").unwrap()).unwrap();
+
+    let n = stdin_iterator.next().unwrap().unwrap().trim().parse::<i32>().unwrap();
+
+    let s: Vec<i32> = stdin_iterator.next().unwrap().unwrap()
+        .trim_end()
+        .split(' ')
+        .map(|s| s.to_string().parse::<i32>().unwrap())
+        .collect();
+
+    let first_multiple_input: Vec<String> = stdin_iterator.next().unwrap().unwrap()
+        .split(' ')
+        .map(|s| s.to_string())
+        .collect();
+
+    let d = first_multiple_input[0].trim().parse::<i32>().unwrap();
+
+    let m = first_multiple_input[1].trim().parse::<i32>().unwrap();
+
+    let result = birth_day(&s, d, m);
+
+    writeln!(&mut fptr, "{}", result).ok();
+}
+#[test]
+fn divisible_sum_pairs(n: i32, k: i32, ar: &[i32]) -> i32 {
+    let mut count = 0;
+
+    for i in 0..n {
+        for j in (i + 1)..n {
+            if (ar[i as usize] + ar[j as usize]) % k == 0 {
+                count += 1;
+            }
+        }
+    }
+    count
+}
+
+fn test15() {
+    let stdin = io::stdin();
+    let mut stdin_iterator = stdin.lock().lines();
+
+    let mut fptr = File::create(env::var("OUTPUT_PATH").unwrap()).unwrap();
+
+    let first_multiple_input: Vec<String> = stdin_iterator.next().unwrap().unwrap()
+        .split(' ')
+        .map(|s| s.to_string())
+        .collect();
+
+    let n = first_multiple_input[0].trim().parse::<i32>().unwrap();
+
+    let k = first_multiple_input[1].trim().parse::<i32>().unwrap();
+
+    let ar: Vec<i32> = stdin_iterator.next().unwrap().unwrap()
+        .trim_end()
+        .split(' ')
+        .map(|s| s.to_string().parse::<i32>().unwrap())
+        .collect();
+
+    let result = divisible_sum_pairs(n, k, &ar);
+
+    writeln!(&mut fptr, "{}", result).ok();
+}
+#[test]
+fn migratory_birds(arr: &[i32]) -> i32 {
+    let mut frequency = HashMap::new();
+    for &bird in arr {
+        *frequency.entry(bird).or_insert(0) += 1;
+    }
+    let mut max_count = 0;
+    let mut bird_type = i32::MAX;
+
+    for (&bird, &count) in &frequency {
+        if count > max_count || (count == max_count && bird < bird_type) {
+            max_count = count;
+            bird_type = bird;
+        }
+    }
+
+    bird_type
+}
+
+fn test16() {
+    let stdin = io::stdin();
+    let mut stdin_iterator = stdin.lock().lines();
+
+    let mut fptr = File::create(env::var("OUTPUT_PATH").unwrap()).unwrap();
+
+    let _arr_count = stdin_iterator.next().unwrap().unwrap().trim().parse::<i32>().unwrap();
+
+    let arr: Vec<i32> = stdin_iterator.next().unwrap().unwrap()
+        .trim_end()
+        .split(' ')
+        .map(|s| s.to_string().parse::<i32>().unwrap())
+        .collect();
+
+    let result = migratory_birds(&arr);
+
+    writeln!(&mut fptr, "{}", result).ok();
+}
+#[test]
+fn bon_appetit(bill: &[i32], k: i32, b: i32) {
+    let total: i32 = bill.iter()
+        .enumerate()
+        .filter(|&(i, _)| i != k as usize)
+        .map(|(_, &v)| v)
+        .sum();
+
+    let fair_share = total / 2;
+
+    if b == fair_share {
+        println!("Bon Appetit");
+    } else {
+        println!("{}", b - fair_share);
+    }
+}
+
+fn test17() {
+    let stdin = io::stdin();
+    let mut stdin_iterator = stdin.lock().lines();
+
+    let first_multiple_input: Vec<String> = stdin_iterator.next().unwrap().unwrap()
+        .split(' ')
+        .map(|s| s.to_string())
+        .collect();
+
+    let n = first_multiple_input[0].trim().parse::<i32>().unwrap();
+
+    let k = first_multiple_input[1].trim().parse::<i32>().unwrap();
+
+    let bill: Vec<i32> = stdin_iterator.next().unwrap().unwrap()
+        .trim_end()
+        .split(' ')
+        .map(|s| s.to_string().parse::<i32>().unwrap())
+        .collect();
+
+    let b = stdin_iterator.next().unwrap().unwrap().trim().parse::<i32>().unwrap();
+
+    bon_appetit(&bill, k, b);
+}
+#[test]
+fn sock_merchant(n: i32, ar: &[i32]) -> i32 {
+    let mut sock_counts = HashMap::new();
+
+    for &sock in ar {
+        *sock_counts.entry(sock).or_insert(0) += 1;
+    }
+
+    sock_counts.values().map(|&count| count / 2).sum()
+}
+
+fn test18() {
+    let stdin = io::stdin();
+    let mut stdin_iterator = stdin.lock().lines();
+
+    let mut fptr = File::create(env::var("OUTPUT_PATH").unwrap()).unwrap();
+
+    let n = stdin_iterator.next().unwrap().unwrap().trim().parse::<i32>().unwrap();
+
+    let ar: Vec<i32> = stdin_iterator.next().unwrap().unwrap()
+        .trim_end()
+        .split(' ')
+        .map(|s| s.to_string().parse::<i32>().unwrap())
+        .collect();
+
+    let result = sock_merchant(n, &ar);
+
+    writeln!(&mut fptr, "{}", result).ok();
+}
+
+#[test]
+fn page_count(n: i32, p: i32) -> i32 {
+    let from_front = p / 2;
+
+    let from_back = (n / 2) - (p / 2);
+
+    from_front.min(from_back)
+}
+
+fn test19() {
+    let stdin = io::stdin();
+    let mut stdin_iterator = stdin.lock().lines();
+
+    let mut fptr = File::create(env::var("OUTPUT_PATH").unwrap()).unwrap();
+
+    let n = stdin_iterator.next().unwrap().unwrap().trim().parse::<i32>().unwrap();
+
+    let p = stdin_iterator.next().unwrap().unwrap().trim().parse::<i32>().unwrap();
+
+    let result = page_count(n, p);
+
+    writeln!(&mut fptr, "{}", result).ok();
+}
+
+#[test]
+fn plus_minus(arr: &[i32]) {
+    let total = arr.len() as f64;
+    let mut positive_count = 0.0;
+    let mut negative_count = 0.0;
+    let mut zero_count = 0.0;
+
+    for &num in arr {
+        if num > 0 {
+            positive_count += 1.0;
+        } else if num < 0 {
+            negative_count += 1.0;
+        } else {
+            zero_count += 1.0;
+        }
+    }
+
+    let positive_ratio = positive_count / total;
+    let negative_ratio = negative_count / total;
+    let zero_ratio = zero_count / total;
+
+    println!("{:.6}", positive_ratio);
+    println!("{:.6}", negative_ratio);
+    println!("{:.6}", zero_ratio);
+}
+
+fn test20() {
+    let stdin = io::stdin();
+    let mut stdin_iterator = stdin.lock().lines();
+
+    let n = stdin_iterator.next().unwrap().unwrap().trim().parse::<i32>().unwrap();
+
+    let arr: Vec<i32> = stdin_iterator.next().unwrap().unwrap()
+        .trim_end()
+        .split(' ')
+        .map(|s| s.to_string().parse::<i32>().unwrap())
+        .collect();
+
+    plus_minus(&arr);
+}
+
