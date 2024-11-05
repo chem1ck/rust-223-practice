@@ -7,7 +7,11 @@ mod chapter43;
 mod chapter44;
 mod hackerrank;
 mod practical;
+
 mod chapter7;
+
+mod chapter8;
+
 
 fn main() {
     println!("Hello, world!");
